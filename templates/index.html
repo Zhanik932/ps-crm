@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <title>Prometheus CRM</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- ✅ Bootstrap 5 CDN -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="bg-light">
+
+  <div class="container py-5">
+    <div class="text-center mb-5">
+      <h1 class="display-4 text-primary">Prometheus CRM</h1>
+      <p class="lead">Управление учениками, заявками и оплатами для вашей школы</p>
+    </div>
+
+    <div class="row justify-content-center">
+      <div class="col-md-4 mb-3">
+        <div class="card shadow-sm">
+          <div class="card-body text-center">
+            <h5 class="card-title">Регистрация</h5>
+            <p class="card-text">Создайте нового пользователя</p>
+            <a href="/register" class="btn btn-outline-primary">Перейти</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4 mb-3">
+        <div class="card shadow-sm">
+          <div class="card-body text-center">
+            <h5 class="card-title">Вход</h5>
+            <p class="card-text">Авторизация в системе</p>
+            <a href="/login" class="btn btn-outline-success">Войти</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4 mb-3">
+        <div class="card shadow-sm">
+          <div class="card-body text-center">
+            <h5 class="card-title">Пользователи</h5>
+            <p class="card-text">Доступ только с токеном</p>
+            <a href="/users-ui" class="btn btn-outline-dark">Открыть</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="text-center mt-4">
+      <div id="status" class="text-muted"></div>
+      <button onclick="logout()" class="btn btn-sm btn-danger mt-2">Выйти</button>
+    </div>
+  </div>
+
+  <script>
+    const token = localStorage.getItem("token");
+    document.getElementById("status").innerText = token
+      ? "✅ Вы вошли"
+      : "🚫 Вы не авторизованы";
+
+    function logout() {
+      localStorage.removeItem("token");
+      alert("Вы вышли");
+      location.reload();
+    }
+  </script>
+
+</body>
+</html>
