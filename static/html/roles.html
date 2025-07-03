@@ -1,0 +1,25 @@
+<!-- Содержимое для динамической загрузки в contentArea -->
+<div class="card">
+    <div class="card-header">
+        <h3>Список ролей</h3>
+        <button id="addRoleBtn" class="button-primary">
+            <i class="bi bi-plus-lg"></i> Добавить роль
+        </button>
+    </div>
+    <div class="card-body">
+        <table class="data-table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Название</th>
+                    <th>Описание</th>
+                    <th class="text-center">Действия</th>
+                </tr>
+            </thead>
+            <tbody id="rolesTableBody">
+                <!-- Данные будут загружены с помощью JS -->
+                <tr><td colspan="4" class="text-center">Загрузка...</td></tr>
+            </tbody>
+        </table>
+    </div>
+</div>

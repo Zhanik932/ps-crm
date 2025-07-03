@@ -1,0 +1,97 @@
+<!-- Содержимое для динамической загрузки в contentArea -->
+<div class="card">
+    <div class="card-header">
+        <h3>Список классов</h3>
+        <button id="addGradeBtn" class="button-primary">
+            <i class="bi bi-plus-lg"></i> Добавить класс
+        </button>
+    </div>
+    <div class="card-body">
+        <table class="data-table grades-list-table">
+            <thead>
+                <tr>
+                    <th class="text-center">Действия</th>
+                    <th>Класс</th>
+                    <th>Литер</th>
+                    <th>Кол-во учеников</th>
+                    <th>Классный руководитель</th>
+                    <th>Тип обучения</th>
+                    <th>Язык обучения</th>
+                </tr>
+            </thead>
+            <tbody id="gradesTableBody">
+                <!-- Данные будут загружены с помощью JS -->
+                <tr><td colspan="7" class="text-center">Загрузка данных...</td></tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<!-- Модальное окно для создания/редактирования класса -->
+<div id="gradeModal" class="modal-overlay" style="display: none;">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h4>Создать класс</h4>
+            <button id="closeGradeModalBtn" class="close-button" aria-label="Закрыть">&times;</button>
+        </div>
+        <div class="modal-body">
+            <form id="gradeForm">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="gradeNumber">Класс (цифра)</label>
+                        <select id="gradeNumber" name="gradeNumber" required>
+                            <option value="" disabled selected>Выберите номер</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                            <option value="7">7</option>
+                            <option value="8">8</option>
+                            <option value="9">9</option>
+                            <option value="10">10</option>
+                            <option value="11">11</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="gradeLiter">Литер (буква)</label>
+                        <input type="text" id="gradeLiter" name="gradeLiter" placeholder="Например: А, Б, М" required>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="homeroomTeacher">Классный руководитель</label>
+                        <select id="homeroomTeacher" name="homeroomTeacher">
+                            <option value="">Не назначен</option>
+                            <!-- Сюда будут подгружаться учителя -->
+                        </select>
+                    </div>
+                </div>
+                 <div class="form-row">
+                    <div class="form-group">
+                        <label for="studyType">Тип обучения</label>
+                        <select id="studyType" name="studyType">
+                            <option value="Очный">Очный</option>
+                            <option value="Онлайн">Онлайн</option>
+                            <option value="Смешанный">Смешанный</option>
+                        </select>
+                    </div>
+                     <div class="form-group">
+                        <label for="studyLanguage">Язык обучения</label>
+                        <select id="studyLanguage" name="studyLanguage">
+                            <option value="Русский">Русский</option>
+                            <option value="Казахский">Казахский</option>
+                            <option value="Английский">Английский</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" id="cancelGradeBtn" class="button-secondary">Отмена</button>
+                    <button type="submit" class="button-primary">Сохранить</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

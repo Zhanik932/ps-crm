@@ -1,10 +1,10 @@
 package config
 
 import (
-	"fmt"
 	"log"
-	"prometheus-crm/models"
+	"os"
 
+	"github.com/joho/godotenv"
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
 )
@@ -12,13 +12,17 @@ import (
 var DB *gorm.DB
 
 func ConnectDB() {
-	dsn := "host=localhost user=postgres password=Rasul2001! dbname=crm port=5432 sslmode=disable TimeZone=Asia/Almaty"
+	err := godotenv.Load("../../.env")
 
-	var err error
-	DB, err = gorm.Open(postgres.Open(dsn), &gorm.Config{})
 	if err != nil {
-		log.Fatal("Ошибка подключения к PostgreSQL:", err)
+		log.Fatal("Ошибка при загрузке .env файла")
 	}
-	fmt.Println("Успешно подключено к PostgreSQL")
-	DB.AutoMigrate(&models.User{})
+
+	dsn := os.Getenv("DB_URL")
+	db, err := gorm.Open(postgres.Open(dsn), &gorm.Config{})
+	if err != nil {
+		log.Fatal("Ошибка подключения к БД:", err)
+	}
+
+	DB = db
 }

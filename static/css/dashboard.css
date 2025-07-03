@@ -1,0 +1,416 @@
+/* =================================
+    Переменные и Глобальные стили
+    ================================= */
+:root {
+    --primary-color: #4A90E2;
+    --primary-hover-color: #357ABD;
+    --body-bg-color: #F5F7FA;
+    --sidebar-bg-color: #FFFFFF;
+    --card-bg-color: #FFFFFF;
+    --font-color: #333;
+    --font-color-light: #6c757d;
+    --border-color: #e9ecef;
+    --shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    --border-radius: 8px;
+    --sidebar-width: 260px;
+    --sidebar-width-collapsed: 80px;
+    --header-height: 70px;
+    --transition-speed: 0.3s;
+}
+
+body, html {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    font-family: 'Inter', sans-serif;
+    background-color: var(--body-bg-color);
+    color: var(--font-color);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* =================================
+    Основная сетка дашборда
+    ================================= */
+.dashboard-layout {
+    display: flex;
+    height: 100vh;
+}
+
+.sidebar {
+    width: var(--sidebar-width);
+    background-color: var(--sidebar-bg-color);
+    border-right: 1px solid var(--border-color);
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    transition: width var(--transition-speed) ease;
+    overflow-x: hidden;
+}
+
+.main-content {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    overflow-y: auto;
+}
+
+/* =================================
+    Стили для Sidebar
+    ================================= */
+.sidebar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+}
+.sidebar-logo {
+    height: 40px;
+    width: auto;
+    transition: opacity var(--transition-speed);
+}
+.sidebar-toggle {
+    background: none;
+    border: none;
+    color: var(--font-color-light);
+    font-size: 1.5rem;
+    cursor: pointer;
+    padding: 5px;
+}
+
+.sidebar-nav {
+    overflow-y: auto;
+    overflow-x: hidden;
+    flex-grow: 1;
+}
+
+.nav-group {
+    margin-bottom: 10px;
+}
+
+.nav-group-toggle {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding: 12px 15px;
+    background: none;
+    border: none;
+    text-align: left;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    border-radius: var(--border-radius);
+    transition: background-color var(--transition-speed), color var(--transition-speed);
+    white-space: nowrap;
+}
+.nav-group-toggle:hover {
+    background-color: var(--body-bg-color);
+}
+.nav-group-toggle span {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+.nav-group-toggle .bi-chevron-down {
+    transition: transform var(--transition-speed);
+}
+
+.nav-group.open .nav-group-toggle {
+    background-color: var(--primary-color);
+    color: white;
+}
+.nav-group.open .nav-group-toggle .bi-chevron-down {
+    transform: rotate(180deg);
+}
+
+.nav-group-links {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease-in-out;
+    padding-left: 25px; /* Отступ для вложенных ссылок */
+}
+
+.nav-link {
+    display: block;
+    color: var(--font-color-light);
+    text-decoration: none;
+    padding: 10px 15px;
+    margin: 4px 0;
+    border-radius: var(--border-radius);
+    transition: background-color var(--transition-speed), color var(--transition-speed);
+    white-space: nowrap;
+}
+.nav-link:hover, .nav-link.active {
+    color: var(--primary-color);
+    background-color: var(--body-bg-color);
+    font-weight: 500;
+}
+
+/* Стили для свернутого Sidebar */
+.sidebar.collapsed {
+    width: var(--sidebar-width-collapsed);
+    padding: 20px 10px;
+}
+/* Прячем только лого, текст в кнопках и стрелку-шеврон */
+.sidebar.collapsed .sidebar-logo,
+.sidebar.collapsed .nav-text, /* <--- Нацеливаемся на новый класс с текстом */
+.sidebar.collapsed .nav-group-toggle .bi-chevron-down {
+    opacity: 0;
+    width: 0;
+    pointer-events: none;
+    transition: opacity 0.2s, width 0.2s; /* Добавим плавности */
+}
+
+/* Дополнительно убедимся, что иконка в span осталась видимой */
+.sidebar.collapsed .nav-group-toggle span {
+    width: auto;
+    opacity: 1;
+}
+.sidebar.collapsed .nav-group-toggle {
+    justify-content: center;
+}
+.sidebar.collapsed .nav-group-toggle .bi {
+    font-size: 1.5rem;
+    margin-right: 0;
+}
+.sidebar.collapsed .nav-group.open .nav-group-links {
+    /* В свернутом виде аккордеон не нужен */
+    max-height: 0 !important;
+}
+
+
+/* =================================
+    Стили для основного контента
+    ================================= */
+.main-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 30px;
+    height: var(--header-height);
+    background-color: var(--card-bg-color);
+    border-bottom: 1px solid var(--border-color);
+    flex-shrink: 0;
+}
+.main-header h1 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin: 0;
+}
+.header-actions {
+    display: flex;
+    align-items: center;
+    gap: 15px; /* Отступ между профилем и кнопкой */
+}
+.user-profile {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+.logout-button {
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    color: var(--font-color-light);
+    cursor: pointer;
+    transition: color var(--transition-speed);
+}
+.logout-button:hover {
+    color: var(--primary-color);
+}
+.content-area {
+    padding: 30px;
+}
+
+/* =================================
+    Карточки, кнопки и таблицы
+    ================================= */
+.card {
+    background-color: var(--card-bg-color);
+    border-radius: var(--border-radius);
+    border: 1px solid var(--border-color);
+    box-shadow: var(--shadow);
+}
+.card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    border-bottom: 1px solid var(--border-color);
+}
+.card-header h3 {
+    margin: 0;
+    font-size: 1.2rem;
+}
+.card-body {
+    padding: 20px;
+}
+
+.button-primary {
+    padding: 10px 20px;
+    border: none;
+    border-radius: var(--border-radius);
+    background-color: var(--primary-color);
+    color: white;
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color var(--transition-speed);
+}
+.button-primary:hover {
+    background-color: var(--primary-hover-color);
+}
+
+.data-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+.data-table th, .data-table td {
+    padding: 15px;
+    text-align: left;
+    border-bottom: 1px solid var(--border-color);
+}
+.data-table thead {
+    background-color: var(--body-bg-color);
+}
+.data-table th {
+    font-weight: 600;
+    font-size: 0.9rem;
+    color: var(--font-color-light);
+}
+.data-table tbody tr:hover {
+    background-color: var(--body-bg-color);
+}
+.text-center { text-align: center; }
+
+/* =================================
+    Адаптивность
+    ================================= */
+@media (max-width: 768px) {
+    .dashboard-layout {
+        flex-direction: column;
+    }
+    .sidebar {
+        width: 100%;
+        height: auto;
+        border-right: none;
+        border-bottom: 1px solid var(--border-color);
+    }
+    .sidebar.collapsed { /* Отключаем сворачивание на мобильных */
+        width: 100%;
+    }
+    .sidebar.collapsed .sidebar-logo,
+    .sidebar.collapsed .nav-group-toggle span,
+    .sidebar.collapsed .nav-group-toggle .bi-chevron-down {
+        opacity: 1;
+        width: auto;
+    }
+    .user-profile .user-email {
+        display: none; /* Скрываем email на маленьких экранах */
+    }
+}
+/* ===============================================
+    Стили для всплывающего меню (Fly-out)
+    =============================================== */
+
+/* Делаем родительский элемент точкой отсчета для позиционирования */
+.nav-group {
+    position: relative;
+}
+
+/* Стилизуем всплывающий блок со ссылками */
+.sidebar.collapsed .nav-group-links {
+    position: absolute; /* Главное изменение: позиционируем абсолютно */
+    left: 100%; /* Появляется справа от родителя */
+    top: 0;
+    width: 200px; /* Задаем фиксированную ширину для всплывающего блока */
+    padding: 10px;
+    background-color: var(--card-bg-color);
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow);
+    border: 1px solid var(--border-color);
+    z-index: 1000; /* Отображается поверх всего */
+
+    /* Прячем его по умолчанию */
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition: opacity 0.2s, visibility 0.2s;
+    
+    /* Сбрасываем max-height от аккордеона */
+    max-height: none !important; 
+}
+
+/* Показываем всплывающий блок при наведении на родителя */
+.sidebar.collapsed .nav-group:hover .nav-group-links {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+}
+/* Стили для модального окна */
+.modal {
+    display: none; /* Скрыто по умолчанию */
+    position: fixed; 
+    z-index: 1000; /* Поверх всего остального */
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.6); /* Полупрозрачный фон */
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: 10% auto; /* Центрирование */
+    padding: 25px;
+    border: 1px solid #888;
+    width: 80%;
+    max-width: 600px; /* Максимальная ширина */
+    border-radius: 8px;
+    position: relative;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+}
+
+/* Кнопка закрытия */
+.close-button {
+    color: #aaa;
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close-button:hover,
+.close-button:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+/* --- ИСПРАВЛЕННЫЙ БЛОК --- */
+.user-profile-link {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: var(--font-color);
+    gap: 10px; /* Расстояние между фото и email */
+    padding: 8px 12px;
+    border-radius: var(--border-radius);
+    transition: background-color 0.3s;
+}
+
+.user-profile-link:hover {
+    background-color: var(--border-color);
+}
+
+.user-photo-sm {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    object-fit: cover; /* Масштабирует изображение, сохраняя пропорции */
+    border: 2px solid var(--border-color);
+}

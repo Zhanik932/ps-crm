@@ -1,0 +1,383 @@
+/* ===================================================================
+    Новый современный дизайн для страницы "Список учеников"
+    =================================================================== */
+
+/* --- 1. Основные переменные и глобальные стили --- */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+:root {
+    /* Цветовая палитра */
+    --primary-color: #4A90E2; /* Спокойный синий */
+    --primary-color-dark: #357ABD;
+    --background-color: #F7F8FC; /* Очень светлый серый фон */
+    --card-background-color: #FFFFFF;
+    --border-color: #E8EBF0;
+    --text-color-primary: #2D3748; /* Темно-серый для основного текста */
+    --text-color-secondary: #718096; /* Светло-серый для второстепенного текста */
+    --success-color: #48BB78;
+    --danger-color: #E53E3E;
+    
+    /* Типографика и размеры */
+    --main-font: 'Inter', sans-serif;
+    --base-font-size: 16px;
+    --border-radius-sm: 4px;
+    --border-radius-md: 8px;
+    --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.05);
+    --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.1);
+    --transition-speed: 0.2s;
+}
+
+/* Применяем базовые стили к body для консистентности */
+body {
+    font-family: var(--main-font);
+    background-color: var(--background-color);
+    color: var(--text-color-primary);
+    font-size: var(--base-font-size);
+}
+
+/* --- 2. Стили для основной карточки и таблицы --- */
+.card {
+    background-color: var(--card-background-color);
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius-md);
+    box-shadow: var(--shadow-sm);
+}
+
+.card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5rem;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.card-header h3 {
+    margin: 0;
+    font-size: 1.5rem;
+    font-weight: 600;
+}
+
+.card-body {
+    padding: 1rem;
+}
+
+.button-primary {
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    font-size: 1rem;
+    font-weight: 500;
+    border-radius: var(--border-radius-md);
+    cursor: pointer;
+    transition: background-color var(--transition-speed), box-shadow var(--transition-speed);
+}
+
+.button-primary:hover {
+    background-color: var(--primary-color-dark);
+    box-shadow: 0 2px 8px rgba(74, 144, 226, 0.4);
+}
+
+/* Стили таблицы */
+.student-list-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.student-list-table thead th {
+    padding: 1rem 1.5rem;
+    text-align: left;
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--text-color-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    border-bottom: 2px solid var(--border-color);
+}
+
+.student-list-table tbody tr {
+    transition: background-color var(--transition-speed);
+}
+
+.student-list-table tbody tr:hover {
+    background-color: #F9FAFB;
+}
+
+.student-list-table td {
+    padding: 1.25rem 1.5rem;
+    border-bottom: 1px solid var(--border-color);
+    vertical-align: middle;
+    color: var(--text-color-primary);
+}
+
+.student-list-table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+/* --- 3. Стили для кнопок и действий в таблице --- */
+.contract-toggle-button {
+    background: none;
+    border: none;
+    color: var(--text-color-secondary);
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: color var(--transition-speed);
+}
+.contract-toggle-button:hover {
+    color: var(--primary-color);
+}
+
+/* Выпадающее меню "Действия" */
+.action-dropdown {
+    position: relative;
+}
+
+.action-button {
+    background-color: #F9FAFB;
+    color: var(--text-color-secondary);
+    padding: 8px 12px;
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius-md);
+    cursor: pointer;
+    font-size: 0.875rem;
+    font-weight: 500;
+    transition: all var(--transition-speed);
+}
+
+.action-button:hover {
+    background-color: #F3F4F6;
+    border-color: #D1D5DB;
+    color: var(--text-color-primary);
+}
+
+.action-dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: var(--card-background-color);
+    min-width: 180px;
+    box-shadow: var(--shadow-md);
+    z-index: 100;
+    border-radius: var(--border-radius-md);
+    border: 1px solid var(--border-color);
+    overflow: hidden;
+    right: 0;
+    top: calc(100% + 5px);
+}
+
+.action-dropdown-content a {
+    color: var(--text-color-primary);
+    padding: 10px 15px;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 0.9rem;
+    transition: background-color var(--transition-speed);
+}
+
+.action-dropdown-content a:hover {
+    background-color: #F9FAFB;
+    color: var(--primary-color);
+}
+
+.action-dropdown.show .action-dropdown-content {
+    display: block;
+}
+
+/* --- 4. Стили для модального окна --- */
+.modal-overlay {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background-color: rgba(31, 41, 55, 0.5); /* Полупрозрачный темный фон */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    backdrop-filter: blur(4px);
+}
+
+#studentModal .modal-content {
+    background-color: var(--background-color);
+    border-radius: var(--border-radius-md);
+    box-shadow: var(--shadow-md);
+    width: 90%;
+    max-width: 800px;
+    max-height: 90vh;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+#studentModal .modal-header {
+    background-color: var(--card-background-color);
+    padding: 1rem 1.5rem;
+    border-bottom: 1px solid var(--border-color);
+}
+
+#studentModal .modal-header h4 {
+    margin: 0;
+    font-size: 1.25rem;
+    font-weight: 600;
+}
+
+.close-button {
+    background: none; border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: var(--text-color-secondary);
+    transition: color var(--transition-speed);
+}
+.close-button:hover {
+    color: var(--text-color-primary);
+}
+
+.modal-body {
+    padding: 1.5rem;
+    overflow-y: auto;
+    background-color: var(--card-background-color);
+}
+
+/* Вкладки в модальном окне */
+.modal-tabs {
+    display: flex;
+    border-bottom: 1px solid var(--border-color);
+    margin-bottom: 1.5rem;
+}
+
+.tab-link {
+    padding: 0.75rem 1rem;
+    text-decoration: none;
+    color: var(--text-color-secondary);
+    margin-bottom: -1px;
+    border-bottom: 2px solid transparent;
+    font-weight: 500;
+    transition: color var(--transition-speed), border-color var(--transition-speed);
+}
+
+.tab-link.active {
+    color: var(--primary-color);
+    border-bottom-color: var(--primary-color);
+}
+
+.tab-pane { display: none; }
+.tab-pane.active { display: block; }
+
+/* Формы в модальном окне */
+.form-row {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group label {
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--text-color-secondary);
+    margin-bottom: 0.5rem;
+}
+
+.form-group input[type="text"],
+.form-group input[type="email"],
+.form-group input[type="tel"],
+.form-group input[type="date"],
+.form-group select,
+.form-group textarea {
+    width: 100%;
+    padding: 10px 12px;
+    font-size: 1rem;
+    font-family: var(--main-font);
+    background-color: var(--card-background-color);
+    border: 1px solid #D1D5DB;
+    border-radius: var(--border-radius-md);
+    transition: border-color var(--transition-speed), box-shadow var(--transition-speed);
+    box-sizing: border-box;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.2);
+}
+
+.modal-footer {
+    display: flex;
+    justify-content: flex-end;
+    gap: 0.75rem;
+    padding: 1rem 1.5rem;
+    border-top: 1px solid var(--border-color);
+    background-color: var(--background-color);
+}
+
+.button-secondary {
+    background-color: var(--card-background-color);
+    color: var(--text-color-primary);
+    border: 1px solid #D1D5DB;
+    padding: 12px 20px;
+    font-size: 1rem;
+    font-weight: 500;
+    border-radius: var(--border-radius-md);
+    cursor: pointer;
+    transition: background-color var(--transition-speed);
+}
+.button-secondary:hover {
+    background-color: #F9FAFB;
+}
+
+/* --- 5. Стили для вложенной секции договоров --- */
+.contracts-row {
+    background-color: #F9FAFB; /* Слегка выделяем фон */
+}
+.contracts-row td {
+    padding: 0 !important;
+    border: none !important;
+}
+
+.contracts-section {
+    display: block; /* Управляется через JS */
+    padding: 1.5rem 2rem 1.5rem 4rem; /* Добавляем отступ слева */
+}
+
+.contracts-section h5 {
+    margin-top: 0;
+    margin-bottom: 1rem;
+    font-weight: 600;
+}
+
+.contracts-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.contracts-table th, .contracts-table td {
+    padding: 10px 12px;
+    text-align: left;
+    border-bottom: 1px solid var(--border-color);
+    font-size: 0.875rem;
+}
+
+.contracts-table th {
+    color: var(--text-color-secondary);
+    font-weight: 500;
+}
+
+.contracts-table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+.contract-number-link {
+    color: var(--primary-color);
+    text-decoration: none;
+    font-weight: 500;
+}
+.contract-number-link:hover {
+    text-decoration: underline;
+}

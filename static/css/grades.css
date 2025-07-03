@@ -1,0 +1,46 @@
+/* ===================================================================
+    Стили для страницы "Список классов"
+    Используют те же переменные, что и students.css для консистентности
+   =================================================================== */
+
+/* Стили таблицы для классов */
+.grades-list-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.grades-list-table thead th {
+    padding: 1rem 1.5rem;
+    text-align: left;
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--text-color-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    border-bottom: 2px solid var(--border-color);
+}
+
+.grades-list-table tbody tr {
+    transition: background-color var(--transition-speed);
+}
+
+.grades-list-table tbody tr:hover {
+    background-color: #F9FAFB;
+}
+
+.grades-list-table td {
+    padding: 1.25rem 1.5rem;
+    border-bottom: 1px solid var(--border-color);
+    vertical-align: middle;
+    color: var(--text-color-primary);
+}
+
+.grades-list-table tbody tr:last-of-type td {
+     border-bottom: none;
+}
+
+/* Стили для модального окна (используются общие стили из dashboard.css или students.css) */
+/* Если нужно, можно добавить специфичные стили для #gradeModal */
+#gradeModal .modal-content {
+    max-width: 600px; /* Можно сделать модалку поуже */
+}

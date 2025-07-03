@@ -1,0 +1,308 @@
+/* =================================
+   Переменные и Глобальные стили
+   ================================= */
+:root {
+  --primary-color: #4A90E2; /* Основной синий цвет */
+  --primary-hover-color: #357ABD; /* Синий при наведении */
+  --secondary-color: #F5F7FA; /* Цвет фона правой части */
+  --left-panel-bg: #f4c369;   /* Цвет фона левой части */
+  --font-color: #333;         /* Основной цвет текста */
+  --gray-color: #888;         /* Серый цвет для подсказок */
+  --border-color: #DDE3E8;    /* Цвет рамок */
+  --white-color: #FFFFFF;      /* Белый цвет */
+  --danger-color: #D9534F;       /* Цвет для ошибок (если понадобится) */
+  --font-family: 'Inter', sans-serif;
+  --border-radius: 8px; /* Скругление углов */
+  --box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+}
+
+body, html {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  font-family: var(--font-family);
+  background-color: var(--secondary-color);
+  color: var(--font-color);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* =================================
+   Основная сетка (Split Screen)
+   ================================= */
+.login-split {
+  display: flex;
+  min-height: 100vh;
+}
+
+/* =================================
+   Левая панель (Брендинг)
+   ================================= */
+.login-left {
+  flex-basis: 50%;
+  background: var(--left-panel-bg);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 40px;
+  box-shadow: var(--box-shadow);
+  z-index: 1;
+}
+
+.login-logo {
+  width: 200px;
+  height: auto;
+  margin-bottom: 20px;
+}
+
+.login-brand {
+  font-size: 1.5rem; /* 24px */
+  font-weight: 700;
+  color: var(--font-color);
+  margin-bottom: 40px;
+  letter-spacing: 1px;
+}
+
+.login-illustration {
+  max-width: 80%;
+  height: auto;
+}
+
+/* =================================
+   Правая панель (Форма входа)
+   ================================= */
+.login-right {
+  flex-basis: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 40px;
+  background-color: var(--secondary-color);
+}
+
+.login-form {
+  width: 100%;
+  max-width: 400px;
+}
+
+.login-form h2 {
+  font-size: 2rem; /* 32px */
+  font-weight: 700;
+  margin-bottom: 24px;
+  text-align: center;
+}
+
+/* =================================
+   Стили для элементов формы
+   ================================= */
+.form-control {
+  width: 100%;
+  padding: 14px 16px;
+  margin-bottom: 16px;
+  font-size: 1rem;
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius);
+  background-color: var(--white-color);
+  transition: border-color 0.3s, box-shadow 0.3s;
+  box-sizing: border-box; /* Важно для правильных расчетов ширины */
+}
+
+.form-control:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.2);
+}
+
+.form-control::placeholder {
+  color: var(--gray-color);
+}
+
+/* Контейнер для поля пароля */
+.password-container {
+  position: relative;
+  margin-bottom: 16px;
+}
+
+/* Иконка глаза для пароля */
+.password-toggle {
+  position: absolute;
+  right: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  color: var(--gray-color);
+  font-size: 1.2rem;
+  user-select: none; /* Предотвращает выделение иконки */
+}
+
+/* =================================
+   Кнопки
+   ================================= */
+.btn-primary {
+  width: 100%;
+  padding: 14px;
+  border: none;
+  border-radius: var(--border-radius);
+  background-color: var(--primary-color);
+  color: var(--white-color);
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.2s;
+}
+
+.btn-primary:hover {
+  background-color: var(--primary-hover-color);
+  transform: translateY(-2px);
+}
+
+.btn-primary:active {
+  transform: translateY(0);
+}
+
+.btn-secondary {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 12px;
+    font-size: 1rem;
+    font-weight: 600;
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius);
+    background-color: var(--white-color);
+    color: var(--font-color);
+    cursor: pointer;
+    transition: background-color 0.3s, border-color 0.3s;
+}
+
+.btn-secondary:hover {
+    background-color: #f8f9fa;
+    border-color: #ccc;
+}
+
+.btn-secondary img {
+    height: 20px;
+    margin-right: 12px;
+}
+
+
+/* =================================
+   Дополнительные элементы
+   ================================= */
+.form-options {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+  font-size: 0.9rem;
+}
+
+.form-check-input {
+  margin-right: 8px;
+  vertical-align: middle;
+}
+
+label {
+  color: var(--gray-color);
+  cursor: pointer;
+}
+
+a.text-primary {
+  color: var(--primary-color);
+  text-decoration: none;
+  font-weight: 600;
+  transition: color 0.3s;
+}
+
+a.text-primary:hover {
+  color: var(--primary-hover-color);
+  text-decoration: underline;
+}
+
+.separator {
+  text-align: center;
+  margin: 24px 0;
+  color: var(--gray-color);
+  position: relative;
+}
+
+.separator::before,
+.separator::after {
+  content: '';
+  display: block;
+  width: 40%;
+  height: 1px;
+  background-color: var(--border-color);
+  position: absolute;
+  top: 50%;
+}
+
+.separator::before {
+  left: 0;
+}
+
+.separator::after {
+  right: 0;
+}
+
+.create-profile-link, .language-switcher {
+  text-align: center;
+  margin-top: 24px;
+}
+
+.language-switcher img {
+  width: 24px;
+  margin: 0 8px;
+  cursor: pointer;
+  opacity: 0.6;
+  transition: opacity 0.3s, transform 0.3s;
+}
+
+.login-illustration {
+  max-width: 80%; /* Или конкретное значение, например 400px */
+  width: 100%;
+  height: auto;
+  margin-top: 40px;
+}
+
+.language-switcher img:hover {
+  opacity: 1;
+  transform: scale(1.1);
+}
+
+/* =================================
+   Адаптивность (Media Queries)
+   ================================= */
+@media (max-width: 992px) {
+  .login-left {
+    display: none; /* Скрываем левую панель на планшетах и мобильных */
+  }
+
+  .login-right {
+    flex-basis: 100%;
+    justify-content: center; /* Центрируем форму */
+  }
+
+  .login-form {
+    max-width: 400px;
+  }
+}
+
+@media (max-width: 480px) {
+    .login-right {
+        padding: 20px;
+    }
+
+    .login-form h2 {
+        font-size: 1.8rem;
+    }
+
+    .form-options {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+    }
+}
